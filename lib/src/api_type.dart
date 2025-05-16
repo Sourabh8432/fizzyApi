@@ -26,7 +26,7 @@ class NetworkApiService implements BaseApiServices {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           if (kDebugMode) {
-            print("➡️ REQUEST:");
+            print("➡️ REQUEST:--------------------------------------------------");
             print("URL: ${options.uri}");
             print("Method: ${options.method}");
             print("Headers: ${options.headers}");
@@ -37,7 +37,7 @@ class NetworkApiService implements BaseApiServices {
         },
         onResponse: (response, handler) {
           if (kDebugMode) {
-            print("✅ RESPONSE:");
+            print("✅ RESPONSE:-------------------------------------------------");
             print("Status Code: ${response.statusCode}");
             log("Data: ${response.data ?? ''}");
           }
@@ -45,7 +45,7 @@ class NetworkApiService implements BaseApiServices {
         },
         onError: (DioException e, handler) {
           if (kDebugMode) {
-            print("❌ ERROR:");
+            print("❌ ERROR:----------------------------------------------------");
             print("Message: ${e.message}");
             print("URL: ${e.requestOptions.uri}");
             print("Headers: ${e.requestOptions.headers}");

@@ -1,5 +1,5 @@
 name: fizzy_api
-description: "A new Flutter project."
+description: "A lightweight and structured wrapper over the `dio` package to simplify API calls in Flutter. `fizzy_api` provides a clean and organized way to make REST API requests with minimal boilerplate and easy customization."
 
 repository: ''
 homepage: ''
