@@ -1,16 +1,45 @@
 # fizzy_api
 
-A new Flutter project.
+A simplified abstraction over the `dio` package to make API calls clean, consistent, and maintainable in Flutter apps.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- Lightweight wrapper over `dio`
+- Supports GET, POST, PUT, DELETE methods
+- Global configuration for base URL
+- Unified response model
+- Loader integration for showing API progress
+- Custom exception handling
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📦 Installation
+
+Add `fizzy_api` to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  fizzy_api: ^1.0.0
+
+## 📚 API Methods
+
+**GET Request**
+
+fizzyApi.getApi(
+  'endpoint',
+  onResponse: (res) => ApiResponse.success(res.data),
+  context: context,
+  showLoader: true,
+);
+
+**POST Request**
+
+fizzyApi.postApi(
+  'login',
+  data: {'email': 'test@example.com', 'password': '123456'},
+  onResponse: (res) => ApiResponse.success(res.data),
+  context: context,
+);
+
