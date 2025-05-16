@@ -1,0 +1,2 @@
+C:/Users/Sourabh/StudioProjects/fizzy_api/example/android/app/.cxx/Debug/3y17375g/x86/CMakeFiles/edit_cache.dir
+C:/Users/Sourabh/StudioProjects/fizzy_api/example/android/app/.cxx/Debug/3y17375g/x86/CMakeFiles/rebuild_cache.dir
