@@ -42,7 +42,7 @@ This will add a line like this to your package's `pubspec.yaml` (and run an impl
 
 ```yaml
 dependencies:
-  fizzy_api: ^1.0.0
+  fizzy_api: ^0.0.1
 ```
 
 Alternatively, your editor might support `dart pub get` or `flutter pub get`. Check the docs for your editor to learn more.
