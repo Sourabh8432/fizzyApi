@@ -1,9 +1,13 @@
 name: fizzy_api
 description: "A lightweight and structured wrapper over the `dio` package to simplify API calls in Flutter. `fizzy_api` provides a clean and organized way to make REST API requests with minimal boilerplate and easy customization."
 
-repository: ''
-homepage: ''
+repository: 'https://github.com/Sourabh8432/fizzyApi.git'
+homepage: 'https://thessk.in'
 version: 0.0.1
+
+author: "Sourabh Sharma <sourabhsharmakhandal37@gmail.com>
+
+license: "MIT"
 
 environment:
   sdk: ^3.7.2
@@ -17,3 +21,21 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+
+social:
+  linkedin: "https://www.linkedin.com/in/ssk84/"
+  github: "https://github.com/Sourabh8432"
+
+example:
+  - example/lib/main.dart
+
+keywords:
+  - flutter
+  - fizzy_api
+  - dio
+  - api
+  - wrapper
+  - rest-api
+  - package
+  - flutter-package
+  - flutter-dio
