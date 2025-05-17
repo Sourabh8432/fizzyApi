@@ -141,56 +141,72 @@ class NetworkApiService implements BaseApiServices {
         ResponseType? responseType,
         dynamic Function(Response response)? onResponse,
         void Function(DioException e)? onError,
-
         bool showLoader = false,
         Color loaderColor = Colors.blue,
         double loaderSize = 40,
         Widget? customLoader,
       }) async {
     final effectiveShowLoader = customLoader != null ? true : showLoader;
-
     dynamic requestData;
 
-    if (body == null || body.isEmpty) {
-      requestData = null;
-    } else if (multipart) {
-      final formMap = <String, dynamic>{};
-      for (var entry in body.entries) {
-        final value = entry.value;
-        if (value is String && value.contains('/') && File(value).existsSync()) {
-          formMap[entry.key] =
-          await MultipartFile.fromFile(value, filename: value.split('/').last);
-        } else {
-          formMap[entry.key] = value;
+    try {
+      // 1. Prepare body (await might cause async gap)
+      if (body == null || body.isEmpty) {
+        requestData = null;
+      } else if (multipart) {
+        final formMap = <String, dynamic>{};
+        for (var entry in body.entries) {
+          final value = entry.value;
+          if (value is String && value.contains('/') && File(value).existsSync()) {
+            formMap[entry.key] = await MultipartFile.fromFile(
+              value,
+              filename: value.split('/').last,
+            );
+          } else {
+            formMap[entry.key] = value;
+          }
         }
+        requestData = FormData.fromMap(formMap);
+      } else {
+        requestData = body;
       }
-      requestData = FormData.fromMap(formMap);
-    } else {
-      requestData = body;
+
+      // 2. Build options
+      final finalOptions = (options ?? Options(headers: headers)).copyWith(
+        responseType: responseType ?? ResponseType.json,
+        contentType: multipart
+            ? Headers.multipartFormDataContentType
+            : Headers.jsonContentType,
+      );
+
+      // 3. Before using context, check if widget is still mounted
+      if (!context.mounted) return;
+
+      // 4. Call your request handler (that shows loader with context)
+      return _requestWrapper(
+            () => _dio.post(
+          url,
+          data: requestData,
+          queryParameters: queryParameters,
+          options: finalOptions,
+        ),
+        context,
+        effectiveShowLoader,
+        loaderColor,
+        loaderSize,
+        customLoader,
+        onResponse,
+        onError,
+      );
+    } catch (e) {
+      if (e is DioException && onError != null) {
+        onError(e);
+      } else {
+        rethrow;
+      }
     }
-
-    final finalOptions = (options ?? Options(headers: headers)).copyWith(
-      responseType: responseType ?? ResponseType.json,
-      contentType:
-      multipart ? Headers.multipartFormDataContentType : Headers.jsonContentType,
-    );
-
-    return _requestWrapper(
-          () => _dio.post(
-        url,
-        data: requestData,
-        queryParameters: queryParameters,
-        options: finalOptions,
-      ),
-      context,
-      effectiveShowLoader,
-      loaderColor,
-      loaderSize,
-      customLoader,
-      onResponse,
-      onError,
-    );
   }
+
 
   @override
   Future<dynamic> putApi(
@@ -349,15 +365,13 @@ class NetworkApiService implements BaseApiServices {
 
   @override
   void showLoader({Color? color, double? size, Widget? customLoader, required BuildContext context}) {
-    if (context != null) {
-      ApiLoaderController().showLoader(
-        context: context,
-        color: color ?? Colors.blue,
-        size: size ?? 40,
-        customLoader: customLoader,
-      );
+    ApiLoaderController().showLoader(
+      context: context,
+      color: color ?? Colors.blue,
+      size: size ?? 40,
+      customLoader: customLoader,
+    );
     }
-  }
 
   @override
   void hideLoader() {

@@ -1,9 +1,5 @@
-library fizzy_api;
-
 import 'package:flutter/material.dart';
-
 import 'fizzy_api.dart';
-import 'src/api_services.dart';
 export 'src/api_exception.dart';
 export 'src/api_services.dart';
 export 'src/api_type.dart';

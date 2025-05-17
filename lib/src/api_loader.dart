@@ -14,13 +14,13 @@ class ApiLoaderController {
     double size = 40,
     Widget? customLoader,
   }) {
-    print("here my code");
+
     if (_loaderEntry != null) return; // already shown
 
     _loaderEntry = OverlayEntry(
       builder: (_) => Stack(
         children: [
-          ModalBarrier(color: Colors.black.withOpacity(0.3)),
+          ModalBarrier(color: Colors.black.withValues(alpha: 0.3)),
           Center(
             child: customLoader ??
                 SizedBox(
