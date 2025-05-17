@@ -1,45 +1,139 @@
 # fizzy_api
 
-A simplified abstraction over the `dio` package to make API calls clean, consistent, and maintainable in Flutter apps.
+A simple and powerful API wrapper for Flutter built on top of Dio.  
+Easily perform GET, POST, PUT, PATCH, DELETE requests with built-in error handling, customizable loaders, response models, and file upload support — all while avoiding repetitive response handling throughout your app.
 
 ---
 
 ## 🚀 Features
 
-- Lightweight wrapper over `dio`
-- Supports GET, POST, PUT, DELETE methods
-- Global configuration for base URL
-- Unified response model
-- Loader integration for showing API progress
-- Custom exception handling
+- Simple and clean API calling with Dio  
+- Built-in response and error handling  
+- Custom loader integration  
+- Request customization (headers, parameters, etc.)  
+- File/image upload support  
+- Unified API response format  
+- Supports all major HTTP methods (GET, POST, PUT, PATCH, DELETE)  
 
 ---
 
 ## 📦 Installation
 
-Add `fizzy_api` to your `pubspec.yaml`:
+Add `fizzy_api` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
   fizzy_api: ^1.0.0
+```
 
-## 📚 API Methods
+Import in your Dart files:
 
-**GET Request**
+```dart
+import 'package:fizzy_api/fizzy_api.dart';
+```
 
+---
+
+## 🧭 Global Navigator Key Setup (Required)
+
+To enable navigation-based features such as displaying a loader or handling errors during API calls, initialize fizzy_api with a global navigatorKey.
+
+### 🔧 Add This to Your main.dart File
+
+```dart
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+void main() {
+  initializeFizzyApi(navigatorKey: navigatorKey);
+  runApp(const MyApp());
+}
+```
+
+
+This setup is essential for fizzy_api to properly handle UI-based interactions across your app.
+
+---
+
+## 📚 Usage Examples
+
+### GET Request
+
+Make a GET request easily with optional loader display and typed response handling.
+
+```dart
 fizzyApi.getApi(
-  'endpoint',
-  onResponse: (res) => ApiResponse.success(res.data),
+  'https://example.com/api/data',
   context: context,
   showLoader: true,
-);
-
-**POST Request**
-
-fizzyApi.postApi(
-  'login',
-  data: {'email': 'test@example.com', 'password': '123456'},
   onResponse: (res) => ApiResponse.success(res.data),
-  context: context,
 );
+```
+
+### POST Request
+
+Send POST requests with data, loader support, and unified response handling.
+
+```dart
+fizzyApi.postApi(
+  'https://example.com/api/login',
+  data: {'email': 'test@example.com', 'password': '123456'},
+  context: context,
+  showLoader: true,
+  onResponse: (res) => ApiResponse.success(res.data),
+);
+```
+
+---
+
+## 🖼️ Uploading Image or File
+
+Easily upload files using multipart form data. Ideal for image or document uploads.
+
+```dart
+fizzyApi.postApi(
+  'upload',
+  data: {'name': 'test', 'image': File('path/to/image.png')},
+  context: context,
+  multipart: true,
+  onResponse: (res) => ApiResponse.success(res.data),
+);
+```
+
+## ✅ PUT Request
+
+Update a complete resource using the PUT method. Perfect for replacing existing user data.
+
+```dart
+fizzyApi.putApi(
+  'user/1',
+  data: {'name': 'New Name'},
+  context: context,
+  onResponse: (res) => ApiResponse.success(res.data),
+);
+```
+
+## ✅ PATCH Request
+
+Modify part of a resource using the PATCH method. Great for status updates or partial changes.
+
+```dart
+fizzyApi.patchApi(
+  'user/1',
+  data: {'status': 'active'},
+  context: context,
+  onResponse: (res) => ApiResponse.success(res.data),
+);
+```
+
+## ✅ DELETE Request
+
+Delete a resource by ID or endpoint with a clean and simple call.
+
+```dart
+fizzyApi.deleteApi(
+  'user/1',
+  context: context,
+  onResponse: (res) => ApiResponse.success(res.data),
+);
+```
 
