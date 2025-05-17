@@ -5,12 +5,12 @@ repository: 'https://github.com/Sourabh8432/fizzyApi.git'
 homepage: 'https://thessk.in'
 version: 0.0.1
 
-author: "Sourabh Sharma <sourabhsharmakhandal37@gmail.com>
+author: "Sourabh Sharma <sourabhsharmakhandal37@gmail.com>"
 
 license: "MIT"
 
 environment:
-  sdk: ^3.7.2
+  sdk: '>=3.3.4 <4.0.0'
 
 dependencies:
   flutter:
