@@ -34,6 +34,26 @@ import 'package:fizzy_api/fizzy_api.dart';
 
 ---
 
+## 🧭 Global Navigator Key Setup (Required)
+
+To enable navigation-based features such as displaying a loader or handling errors during API calls, initialize fizzy_api with a global navigatorKey.
+
+### 🔧 Add This to Your main.dart File
+
+```dart
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+void main() {
+  initializeFizzyApi(navigatorKey: navigatorKey);
+  runApp(const MyApp());
+}
+```
+
+
+This setup is essential for fizzy_api to properly handle UI-based interactions across your app.
+
+---
+
 ## 📚 Usage Examples
 
 ### GET Request
@@ -116,3 +136,4 @@ fizzyApi.deleteApi(
   onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
+
