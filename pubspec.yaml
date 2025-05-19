@@ -1,9 +1,9 @@
 name: fizzy_api
-description: "A lightweight and structured wrapper over the `dio` package to simplify API calls in Flutter. `fizzy_api` provides a clean and organized way to make REST API requests with minimal boilerplate and easy customization."
+description: "A lightweight, structured wrapper around dio that simplifies Flutter API calls with minimal boilerplate and easy customization."
 
 repository: 'https://github.com/Sourabh8432/fizzyApi.git'
 homepage: 'https://thessk.in'
-version: 0.0.1
+version: 0.0.2
 
 license: "MIT"
 
