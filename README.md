@@ -18,6 +18,47 @@ Easily perform GET, POST, PUT, PATCH, DELETE requests with built-in error handli
 
 ---
 
+## Usage
+
+### Method Signature Parameters
+
+```dart
+/// Parameters:
+/// 
+/// - [url] (required): The endpoint to call.
+///
+/// - [context] (required): Used to show a loader or other UI feedback. Must be provided when [showLoader] is true.
+///
+/// - [body]: The request payload to send (for POST, PUT, PATCH).
+///
+/// - [multipart]: Set to `true` if the request includes file uploads (multipart/form-data). Defaults to `false`.
+///
+/// - [headers]: Optional custom headers to include with the request.
+///
+/// - [queryParameters]: Optional query parameters appended to the URL.
+///
+/// - [options]: Custom Dio [Options], such as timeout settings or content type overrides.
+///
+/// - [responseType]: Defines the expected response type (e.g. [ResponseType.json], [ResponseType.plain], etc.).
+///
+/// - [onResponse]: Callback triggered on successful response (status code 2xx). Provides the full [Response] object.
+///
+/// - [onError]: Callback triggered on error. Provides a [DioException] for granular error handling.
+///
+/// - [showLoader]: If `true`, a loader overlay is shown during the API call. Defaults to `false`.
+///
+/// - [loaderColor]: The color of the default CircularProgressIndicator loader. Defaults to [Colors.blue].
+///
+/// - [loaderSize]: Diameter of the loader spinner. Defaults to `40.0`.
+///
+/// - [customLoader]: Provide a custom [Widget] to use instead of the default loader.
+///
+/// - [showDebug]: If `true`, logs request/response metadata (for debugging). Defaults to `true`.
+```
+
+---
+
+---
 
 ## 🧭 Global Navigator Key Setup (Required)
 
