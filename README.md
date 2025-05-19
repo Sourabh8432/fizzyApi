@@ -1,5 +1,5 @@
 
-# fizzy_api 
+# fizzy_api
 
 A simple and powerful API wrapper for Flutter built on top of Dio.  
 Easily perform GET, POST, PUT, PATCH, DELETE requests with built-in error handling, customizable loaders, response models, and file upload support — all while avoiding repetitive response handling throughout your app.
@@ -8,57 +8,57 @@ Easily perform GET, POST, PUT, PATCH, DELETE requests with built-in error handli
 
 ## 🚀 Features
 
-- Simple and clean API calling with Dio  
-- Built-in response and error handling  
-- Custom loader integration  
-- Request customization (headers, parameters, etc.)  
-- File/image upload support  
-- Unified API response format  
-- Supports all major HTTP methods (GET, POST, PUT, PATCH, DELETE)  
+- Simple and clean API calling with Dio
+- Built-in response and error handling
+- Custom loader integration
+- Request customization (headers, parameters, etc.)
+- File/image upload support
+- Unified API response format
+- Supports all major HTTP methods (GET, POST, PUT, PATCH, DELETE)
 
 ---
 
-<<<<<<< HEAD
-=======
-## 📦 Installation
+## Usage
 
-### Use this package as a library
-
-#### Depend on it
-
-Run this command:
-
-With Dart:
-
-```bash
-dart pub add fizzy_api
-```
-
-With Flutter:
-
-```bash
-flutter pub add fizzy_api
-```
-
-This will add a line like this to your package's `pubspec.yaml` (and run an implicit `dart pub get`):
-
-```yaml
-dependencies:
-  fizzy_api: ^0.0.1
-```
-
-Alternatively, your editor might support `dart pub get` or `flutter pub get`. Check the docs for your editor to learn more.
-
-#### Import it
-
-Now in your Dart code, you can use:
+### Method Signature Parameters
 
 ```dart
-import 'package:fizzy_api/fizzy_api.dart';
+/// Parameters:
+/// 
+/// - [url] (required): The endpoint to call.
+///
+/// - [context] (required): Used to show a loader or other UI feedback. Must be provided when [showLoader] is true.
+///
+/// - [body]: The request payload to send (for POST, PUT, PATCH).
+///
+/// - [multipart]: Set to `true` if the request includes file uploads (multipart/form-data). Defaults to `false`.
+///
+/// - [headers]: Optional custom headers to include with the request.
+///
+/// - [queryParameters]: Optional query parameters appended to the URL.
+///
+/// - [options]: Custom Dio [Options], such as timeout settings or content type overrides.
+///
+/// - [responseType]: Defines the expected response type (e.g. [ResponseType.json], [ResponseType.plain], etc.).
+///
+/// - [onResponse]: Callback triggered on successful response (status code 2xx). Provides the full [Response] object.
+///
+/// - [onError]: Callback triggered on error. Provides a [DioException] for granular error handling.
+///
+/// - [showLoader]: If `true`, a loader overlay is shown during the API call. Defaults to `false`.
+///
+/// - [loaderColor]: The color of the default CircularProgressIndicator loader. Defaults to [Colors.blue].
+///
+/// - [loaderSize]: Diameter of the loader spinner. Defaults to `40.0`.
+///
+/// - [customLoader]: Provide a custom [Widget] to use instead of the default loader.
+///
+/// - [showDebug]: If `true`, logs request/response metadata (for debugging). Defaults to `true`.
 ```
 
 ---
->>>>>>> beb4f58ada286d2957d0f0c63431e7137de5baeb
+
+---
 
 ## 🧭 Global Navigator Key Setup (Required)
 
@@ -87,10 +87,10 @@ Make a GET request easily with optional loader display and typed response handli
 
 ```dart
 fizzyApi.getApi(
-  'https://example.com/api/data',
-  context: context,
-  showLoader: true,
-  onResponse: (res) => ApiResponse.success(res.data),
+'https://example.com/api/data',
+context: context,
+showLoader: true,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
 
@@ -100,11 +100,11 @@ Send POST requests with data, loader support, and unified response handling.
 
 ```dart
 fizzyApi.postApi(
-  'https://example.com/api/login',
-  data: {'email': 'test@example.com', 'password': '123456'},
-  context: context,
-  showLoader: true,
-  onResponse: (res) => ApiResponse.success(res.data),
+'https://example.com/api/login',
+data: {'email': 'test@example.com', 'password': '123456'},
+context: context,
+showLoader: true,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
 
@@ -116,11 +116,11 @@ Easily upload files using multipart form data. Ideal for image or document uploa
 
 ```dart
 fizzyApi.postApi(
-  'upload',
-  data: {'name': 'test', 'image': File('path/to/image.png')},
-  context: context,
-  multipart: true,
-  onResponse: (res) => ApiResponse.success(res.data),
+'upload',
+data: {'name': 'test', 'image': File('path/to/image.png')},
+context: context,
+multipart: true,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
 
@@ -130,10 +130,10 @@ Update a complete resource using the PUT method. Perfect for replacing existing 
 
 ```dart
 fizzyApi.putApi(
-  'user/1',
-  data: {'name': 'New Name'},
-  context: context,
-  onResponse: (res) => ApiResponse.success(res.data),
+'user/1',
+data: {'name': 'New Name'},
+context: context,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
 
@@ -143,10 +143,10 @@ Modify part of a resource using the PATCH method. Great for status updates or pa
 
 ```dart
 fizzyApi.patchApi(
-  'user/1',
-  data: {'status': 'active'},
-  context: context,
-  onResponse: (res) => ApiResponse.success(res.data),
+'user/1',
+data: {'status': 'active'},
+context: context,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
 
@@ -156,8 +156,8 @@ Delete a resource by ID or endpoint with a clean and simple call.
 
 ```dart
 fizzyApi.deleteApi(
-  'user/1',
-  context: context,
-  onResponse: (res) => ApiResponse.success(res.data),
+'user/1',
+context: context,
+onResponse: (res) => ApiResponse.success(res.data),
 );
 ```
