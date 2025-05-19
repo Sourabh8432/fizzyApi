@@ -20,7 +20,10 @@ class ApiLoaderController {
     _loaderEntry = OverlayEntry(
       builder: (_) => Stack(
         children: [
-          ModalBarrier(color: Colors.black.withValues(alpha: 0.3)),
+          ModalBarrier(
+            color: Colors.black.withOpacity(0.3),
+          ),
+
           Center(
             child: customLoader ??
                 SizedBox(

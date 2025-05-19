@@ -1,7 +1,7 @@
 import 'package:fizzy_api/fizzy_api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'api_response.dart';
-import 'loader.dart'; // your ApiResponse file import
+import 'loader.dart';
 
 
 
@@ -39,40 +39,52 @@ class _ApiDemoScreenState extends State<ApiDemoScreen> {
     });
   }
 
+
   Future<void> getPost() async {
-    print("SSK");
-    final response = await fizzyApi.getApi(
+    await fizzyApi.getApi(
       'https://jsonplaceholder.typicode.com/posts/1',
-      onResponse: (res) => ApiResponse.success(res.data),
       showLoader: true,
-      loaderColor: Colors.red, context: context,
+      loaderColor: Colors.red,
+      context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          if (kDebugMode) {
+            print("Success");
+            _updateOutput("GET: ${res.data['title']}");
+          }
+        }
+      },
+      onError: (e) {
+        _updateOutput("Error: ${e.message}");
+
+      },
     );
 
-
-    if (response.status == Status.success) {
-      _updateOutput("GET: ${response.data['title']}");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
   }
 
+
   Future<void> getAllPosts() async {
-    final response = await fizzyApi.getApi(
+    await fizzyApi.getApi(
       'https://jsonplaceholder.typicode.com/posts',
-      onResponse: (res) => ApiResponse.success(res.data),
       showLoader: true,
-        loaderColor: Colors.blue, context: context
+        showDebug: true,
+        loaderColor: Colors.blue, context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          if (kDebugMode) {
+            print("Success");
+            _updateOutput("Total posts fetched: ${res.data.length}");
+          }
+        }
+      },
     );
 
-    if (response.status == Status.success) {
-      _updateOutput("Total posts fetched: ${response.data.length}");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
+
+
   }
 
   Future<void> createPost() async {
-    final response = await fizzyApi.postApi(
+     await fizzyApi.postApi(
       'https://jsonplaceholder.typicode.com/posts',
       body: {
         'title': 'New Title',
@@ -80,18 +92,22 @@ class _ApiDemoScreenState extends State<ApiDemoScreen> {
         'userId': 1,
       },
       customLoader: const ModernOrbitLoader(),
-      onResponse: (res) => ApiResponse.success(res.data), context: context,
+      context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          _updateOutput("POST Created: ID = ${res.data['id']}");
+        }
+      },
+      onError: (e) {
+        _updateOutput("Error: ${e.message}");
+      },
     );
 
-    if (response.status == Status.success) {
-      _updateOutput("POST Created: ID = ${response.data['id']}");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
+
   }
 
   Future<void> updatePostPut() async {
-    final response = await fizzyApi.putApi(
+    await fizzyApi.putApi(
       'https://jsonplaceholder.typicode.com/posts/1',
       body: {
         'id': 1,
@@ -101,45 +117,55 @@ class _ApiDemoScreenState extends State<ApiDemoScreen> {
       },
       showLoader: true,
         loaderColor: Colors.blue,
-      onResponse: (res) => ApiResponse.success(res.data), context: context,
+       context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          _updateOutput("PUT Updated: ${res.data['title']}");
+        }
+      },
+      onError: (e) {
+        _updateOutput("Error: ${e.message }");
+      },
     );
 
-    if (response.status == Status.success) {
-      _updateOutput("PUT Updated: ${response.data['title']}");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
+
   }
 
   Future<void> updatePostPatch() async {
-    final response = await fizzyApi.patchApi(
+     await fizzyApi.patchApi(
       'https://jsonplaceholder.typicode.com/posts/1',
       body: {'title': 'Patched Title'},
-      onResponse: (res) => ApiResponse.success(res.data),
       showLoader: true,
         loaderColor: Colors.blue, context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          _updateOutput("PATCH Updated: ${res.data['title']}");
+        }
+      },
+      onError: (e) {
+        _updateOutput("Error: ${e.message }");
+      },
     );
 
-    if (response.status == Status.success) {
-      _updateOutput("PATCH Updated: ${response.data['title']}");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
+
   }
 
   Future<void> deletePost() async {
-    final response = await fizzyApi.deleteApi(
+    await fizzyApi.deleteApi(
       'https://jsonplaceholder.typicode.com/posts/1',
-      onResponse: (res) => ApiResponse.success("Deleted"),
       showLoader: true,
         loaderColor: Colors.blue, context: context,
+      onResponse: (res)  {
+        if(res.statusCode == 200){
+          _updateOutput("DELETE Success");
+        }
+      },
+      onError: (e) {
+        _updateOutput("Error: ${e.message}");
+      },
     );
 
-    if (response.status == Status.success) {
-      _updateOutput("DELETE Success");
-    } else {
-      _updateOutput("Error: ${response.message ?? response.status}");
-    }
+
   }
 
   Widget buildButton(String label, VoidCallback onPressed) {

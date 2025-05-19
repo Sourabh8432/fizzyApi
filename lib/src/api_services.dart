@@ -12,6 +12,7 @@ abstract class BaseApiServices {
         ResponseType? responseType,
         dynamic Function(Response response)? onResponse,
         void Function(DioException e)? onError,
+        bool showDebug = true,
       });
 
   /// Performs a POST request

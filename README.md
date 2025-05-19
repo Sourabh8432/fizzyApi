@@ -18,44 +18,6 @@ Easily perform GET, POST, PUT, PATCH, DELETE requests with built-in error handli
 
 ---
 
-## 📦 Installation
-
-### Use this package as a library
-
-#### Depend on it
-
-Run this command:
-
-With Dart:
-
-```bash
-dart pub add fizzy_api
-```
-
-With Flutter:
-
-```bash
-flutter pub add fizzy_api
-```
-
-This will add a line like this to your package's `pubspec.yaml` (and run an implicit `dart pub get`):
-
-```yaml
-dependencies:
-  fizzy_api: ^1.0.0
-```
-
-Alternatively, your editor might support `dart pub get` or `flutter pub get`. Check the docs for your editor to learn more.
-
-#### Import it
-
-Now in your Dart code, you can use:
-
-```dart
-import 'package:fizzy_api/fizzy_api.dart';
-```
-
----
 
 ## 🧭 Global Navigator Key Setup (Required)
 
