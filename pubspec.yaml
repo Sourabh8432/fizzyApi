@@ -3,12 +3,12 @@ description: "A lightweight, structured wrapper around dio that simplifies Flutt
 
 repository: 'https://github.com/Sourabh8432/fizzyApi.git'
 homepage: 'https://thessk.in'
-version: 0.0.2
+version: 0.0.3
 
 license: "MIT"
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:

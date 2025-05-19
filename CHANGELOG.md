@@ -10,3 +10,7 @@
 ## [0.0.2] - 2025-05-19
 ### Added
 - Added `showDebug` parameter to the `fizzy_api` package for enabling request and response logging.
+
+## [0.0.3] - 2025-05-19
+### Added
+- Fixed bugs in `fizzy_api`.
