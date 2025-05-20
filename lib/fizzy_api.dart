@@ -4,6 +4,7 @@ export 'src/api_exception.dart';
 export 'src/api_services.dart';
 export 'src/api_type.dart';
 export 'src/api_loader.dart';
+export 'package:dio/dio.dart';
 
 NetworkApiService? _instance;
 

@@ -383,17 +383,32 @@ class NetworkApiService implements BaseApiServices {
 
 // Builds Dio Options by merging headers, base options, responseType, and debug flags
   Options _buildOptions(
-    Map<String, dynamic>? headers,
-    Options? baseOptions,
-    ResponseType? responseType,
-    bool showDebug,
-  ) {
-    return (baseOptions ?? Options(headers: headers)).copyWith(
-      responseType:
-          responseType ?? ResponseType.json, // Default to JSON response type
-      extra: {'showDebug': showDebug}, // Store debug flag in extra
+      Map<String, dynamic>? headers,
+      Options? userOptions,
+      ResponseType? responseType,
+      bool showDebug,
+      ) {
+    return Options(
+      method: userOptions?.method,
+      sendTimeout: userOptions?.sendTimeout,
+      receiveTimeout: userOptions?.receiveTimeout,
+      extra: userOptions?.extra,
+      headers: {
+        ...?userOptions?.headers,
+        ...?headers,
+      },
+      responseType: userOptions?.responseType ?? responseType ?? ResponseType.json,
+      contentType: userOptions?.contentType,
+      validateStatus: userOptions?.validateStatus,
+      receiveDataWhenStatusError: userOptions?.receiveDataWhenStatusError ?? true,
+      followRedirects: userOptions?.followRedirects ?? true,
+      maxRedirects: userOptions?.maxRedirects ?? 5,
+      requestEncoder: userOptions?.requestEncoder,
+      responseDecoder: userOptions?.responseDecoder,
+      listFormat: userOptions?.listFormat,
     );
   }
+
 
 // Checks if debugging should be done based on request options and debug mode
   bool _shouldDebug(RequestOptions options) =>
